@@ -1,9 +1,9 @@
-//
-//  SharkfoodMuteSwitchDetector.h
-//
-//  Created by Moshe Gottlieb on 6/2/13.
-//  Copyright (c) 2013 Sharkfood. All rights reserved.
-//
+
+
+
+
+
+
 
 #import <Foundation/Foundation.h>
 

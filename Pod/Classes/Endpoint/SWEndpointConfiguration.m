@@ -1,10 +1,10 @@
-//
-//  SWEndpointConfiguration.m
-//  swig
-//
-//  Created by Pierre-Marc Airoldi on 2014-08-20.
-//  Copyright (c) 2014 PeteAppDesigns. All rights reserved.
-//
+
+
+
+
+
+
+
 
 #import "SWEndpointConfiguration.h"
 #import "SWTransportConfiguration.h"
@@ -29,21 +29,23 @@
         return nil;
     }
     
-    //ua config
+    
     _maxCalls = kSWMaxCalls;
     
-    //log config
+    
     _logLevel = kSWLogLevel;
     _logConsoleLevel = kSWLogConsoleLevel;
     _logFilename = kSWLogFilename;
     _logFileFlags = kSWLogFileFlags;
     
-    //media config
+    
     _clockRate = kSWClockRate;
     _sndClockRate = kSWSndClockRate;
     
     _transportConfigurations = [NSArray new];
-        
+    _ringtones = [NSMutableDictionary new];
+    _callKitCanHandleAudioSession = YES;
+    
     return self;
 }
 
@@ -51,7 +53,7 @@
     
     if (!transportConfigurations || transportConfigurations.count == 0) {
     
-        // DDLogDebug(@"A transport configuration needs to be specified. Created a basic UDP configuration for you.");
+        
         SWTransportConfiguration *configuration = [SWTransportConfiguration configurationWithTransportType:SWTransportTypeUDP];
         
         transportConfigurations = @[configuration];
@@ -66,7 +68,7 @@
 -(void)setLogLevel:(NSUInteger)logLevel {
     
     if (logLevel <= 0) {
-        DDLogDebug(@"log level has to be greater than 0. Setting it to the default.");
+        
         _logLevel = kSWLogLevel;
     }
     
@@ -78,7 +80,7 @@
 -(void)setLogConsoleLevel:(NSUInteger)logConsoleLevel {
     
     if (logConsoleLevel <= 0) {
-        DDLogDebug(@"log console level has to be greater than 0. Setting it to the default.");
+        
         _logConsoleLevel = kSWLogConsoleLevel;
     }
     

@@ -1,62 +1,37 @@
-//
-//  SharkfoodMuteSwitchDetector.m
-//
-//  Created by Moshe Gottlieb on 6/2/13.
-//  Copyright (c) 2013 Sharkfood. All rights reserved.
-//
+
+
+
+
+
+
 
 #import "SharkfoodMuteSwitchDetector.h"
 #import <AudioToolbox/AudioToolbox.h>
 #import <UIKit/UIKit.h>
 
-/**
- Sound completion proc - this is the real magic, we simply calculate how long it took for the sound to finish playing
- In silent mode, playback will end very fast (but not in zero time)
- */
+
 void SharkfoodSoundMuteNotificationCompletionProc(SystemSoundID  ssID,void* clientData);
 
 @interface SharkfoodMuteSwitchDetector()
-/**
- Find out how fast the completion call is called
- */
+
 @property (nonatomic,assign) NSTimeInterval interval;
-/**
- Our silent sound (0.5 sec)
- */
+
 @property (nonatomic,assign) SystemSoundID soundId;
-/**
- Set to true after the block was set or during init.
- Otherwise the block is called only when the switch value actually changes
- */
+
 @property (nonatomic,assign) BOOL forceEmit;
-/**
- Sound completion, objc
- */
+
 -(void)complete;
-/**
- Our loop, checks sound switch
- */
+
 -(void)loopCheck;
-/**
- Pause while in the background, if your app supports playing audio in the background, you want this.
- Otherwise your app will be rejected.
- */
+
 -(void)didEnterBackground;
-/**
- Resume when entering foreground
- */
+
 -(void)willReturnToForeground;
-/**
- Schedule a next check
- */
+
 -(void)scheduleCall;
-/**
- Is paused?
- */
+
 @property (nonatomic,assign) BOOL isPaused;
-/**
- Currently playing? used when returning from the background (if went to background and foreground really quickly)
-*/
+
 @property (nonatomic,assign) BOOL isPlaying;
 
 @end
@@ -121,7 +96,7 @@ void SharkfoodSoundMuteNotificationCompletionProc(SystemSoundID  ssID,void* clie
 -(void)complete{
     self.isPlaying = NO;
     NSTimeInterval elapsed = [NSDate timeIntervalSinceReferenceDate] - self.interval;
-    BOOL isMute = elapsed < 0.1; // Should have been 0.5 sec, but it seems to return much faster (0.3something)
+    BOOL isMute = elapsed < 0.1; 
     if (self.isMute != isMute || self.forceEmit) {
         self.forceEmit = NO;
         _isMute = isMute;
@@ -141,7 +116,7 @@ void SharkfoodSoundMuteNotificationCompletionProc(SystemSoundID  ssID,void* clie
 }
 
 
-// For reference only, this DTOR will never be invoked.
+
 
 -(void)dealloc{
     if (self.soundId != -1){

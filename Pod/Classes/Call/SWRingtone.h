@@ -1,10 +1,10 @@
-//
-//  SWRingtone.h
-//  
-//
-//  Created by Pierre-Marc Airoldi on 2014-09-04.
-//
-//
+
+
+
+
+
+
+
 
 #import <Foundation/Foundation.h>
 #import "SWPlayableProtocol.h"
@@ -14,8 +14,13 @@
 
 @property (nonatomic, readonly) BOOL isPlaying;
 @property (nonatomic) float volume;
+@property (nonatomic, assign) BOOL noVibrations;
 @property (nonatomic, strong, readonly) NSURL *fileURL;
+@property (nonatomic) BOOL isFinite;
 
 -(instancetype)initWithFileAtPath:(NSURL *)path;
+-(void) startRingtone;
+
+- (void) setAudioPlayerDelegate: (id<AVAudioPlayerDelegate>) delegate;
 
 @end
